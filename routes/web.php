@@ -12,9 +12,12 @@
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return view('pages.dashboard');
 });
 
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
+
+Route::resource('projects', 'ProjectController', ['only' => ['show', 'destroy', 'index', 'update', 'store']]);
+

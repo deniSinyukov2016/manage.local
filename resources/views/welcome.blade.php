@@ -34,7 +34,8 @@
             .position-ref {
                 position: relative;
             }
-
+<!-- StyleSheets -->
+    <link rel="stylesheet" href="{{ URL::asset('css/app.css') }}">
             .top-right {
                 position: absolute;
                 right: 10px;
