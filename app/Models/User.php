@@ -8,7 +8,6 @@ use Symfony\Component\HttpKernel\Exception\HttpException;
 
 /**
  * @property int id
- * @property bool is_admin
  * @property bool password
  * @property string avatar
  */
@@ -22,17 +21,18 @@ class User extends Authenticatable
 
     public function addUser(array $user)
     {
-        if (!$this->exists || !$this->isAdmin()) {
+        if (!$this->exists || !$this->hasRole(config('enums.roles.ADMIN'))) {
             throw new HttpException('You is not admin!', 500);
         }
 
         return static::query()->create($user);
     }
 
-    public function isAdmin()
+    public function getFullnameAttribute()
     {
-        return $this->is_admin;
+        return "{$this->first_name} {$this->last_name}";
     }
+
 
     public function createdProjects()
     {
@@ -61,7 +61,7 @@ class User extends Authenticatable
 
     public function attachProjects(int $paginate = 10)
     {
-        if ($this->isAdmin()) {
+        if ($this->hasRole('admin')) {
             return Project::query()->withCount('comments')->paginate($paginate);
         }
 
@@ -76,5 +76,20 @@ class User extends Authenticatable
     public function getAvatarUrlAttribute()
     {
         return url('storage/avatars/' . $this->avatar);
+    }
+
+    public function roles()
+    {
+        return $this->belongsToMany(Role::class);
+    }
+
+    public function hasRole($check)
+    {
+        return in_array($check, array_pluck($this->roles->toArray(), 'name'));
+    }
+
+    public function attachRole(string $name)
+    {
+        return $this->roles()->attach($name);
     }
 }

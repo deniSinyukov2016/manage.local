@@ -28,9 +28,10 @@ class ProjectController extends Controller
             return response()->json($projects);
         }
 
-        //$projects = auth()->user()->attachProjects(request('count', 15));
+//        $projects = auth()->user()->attachProjects(request('count', 15));
+        $projects = auth()->user()->projects()->get();
 
-        return response()->json(Project::query()->paginate(10));
+        return response()->json($projects);
     }
 
     public function show(Project $project)

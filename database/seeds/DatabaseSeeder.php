@@ -17,28 +17,30 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
-        $this->setUpFaker();
+        $this->call(RoleSeeder::class);
+        $this->call(UserSeeder::class);
+//        $this->setUpFaker();
 
-         /** @var \Illuminate\Support\Collection $projects */
-         $projects = create(Project::class, ['user_id' => 1], 15);
+//         /** @var \Illuminate\Support\Collection $projects */
+//         $projects = create(Project::class, ['user_id' => 1], 15);
 
-         $projects->each(function (Project $project) {
-             create(User::class, ['is_admin' => false], random_int(2, 6));
+//         $projects->each(function (Project $project) {
+//             create(User::class, [], random_int(2, 6));
+//
+//             $users = User::query()->get()->take(random_int(2, 10));
+//             $users->each(function (User $user) use ($project) {
+//                 $project->users()->attach($user->id);
+//                 $times = random_int(4, 10);
+//                 for($i = 0; $i < $times; $i++) {
+//                     create(Comment::class, [
+//                         'user_id'    => $user->id,
+//                         'project_id' => $project->id,
+//                         'created_at' => $this->faker()->unique()->dateTimeBetween('-2 month')
+//                     ]);
+//                 }
+//             });
+//         });
 
-             $users = User::query()->where('is_admin', false)->get()->take(random_int(2, 10));
-             $users->each(function (User $user) use ($project) {
-                 $project->users()->attach($user->id);
-                 $times = random_int(4, 10);
-                 for($i = 0; $i < $times; $i++) {
-                     create(Comment::class, [
-                         'user_id'    => $user->id,
-                         'project_id' => $project->id,
-                         'created_at' => $this->faker()->unique()->dateTimeBetween('-2 month')
-                     ]);
-                 }
-             });
-         });
-
-         create(Idea::class, [], 15);
+//         create(Idea::class, [], 15);
     }
 }

@@ -89,7 +89,7 @@
 {{--<link href="../vendors/animate.css/animate.min.css" rel="stylesheet">--}}
 
 {{--<!-- StyleSheets -->--}}
-    {{--<link rel="stylesheet" href="{{ URL::asset('css/app.css') }}">--}}
+    {{--<link rel="stylesheet" href="{{ URL::assets('css/app.css') }}">--}}
 
 
     {{--<!-- Custom Theme Style -->--}}

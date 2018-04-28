@@ -1,6 +1,10 @@
 require('./bootstrap');
 
 import Vue from "vue";
+import axios from 'axios'
+
+Vue.use(axios)
+
 import VueRouter from "vue-router";
 // import {routes} from "./routes"
 
@@ -12,6 +16,8 @@ import VueRouter from "vue-router";
 //     routes
 // });
 Vue.component('list-projects', require('./components/projects/List-projects.vue'));
+Vue.component('sidebar-menu', require('./components/settings/sidebar-menu.vue'));
+Vue.component('nav-bar', require('./components/settings/nav-bar.vue'));
 
 const app = new Vue({
     // router,

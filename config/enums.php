@@ -30,5 +30,9 @@ return [
             'FIXED' => 'Fixed',
             'ONGOING' => 'Ongoing'
         ]
-    ]
+    ],
+    'roles' => [
+        'ADMIN' => 'admin',
+        'USER'  => 'user',
+    ],
 ];

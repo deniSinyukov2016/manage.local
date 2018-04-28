@@ -17,7 +17,11 @@ Route::get('/', function () {
 
 Auth::routes();
 
-Route::get('/home', 'HomeController@index')->name('home');
+Route::group(['middleware' => ['web', 'auth']], function() {
+    Route::get('dashboard', 'PageController@dashboard')->name('dashboard.index');
 
-Route::resource('projects', 'ProjectController', ['only' => ['show', 'destroy', 'index', 'update', 'store']]);
+    Route::resource('projects', 'ProjectController', ['only' => ['show', 'destroy', 'index', 'update', 'store']]);
+});
+
+
 
