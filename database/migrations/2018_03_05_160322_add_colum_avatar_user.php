@@ -14,7 +14,7 @@ class AddColumAvatarUser extends Migration
     public function up()
     {
         Schema::table('users', function($table) {
-            $table->string('avatar')->default('user.jpg');
+            $table->string('avatar')->default('default_user.png');
         });
     }
 

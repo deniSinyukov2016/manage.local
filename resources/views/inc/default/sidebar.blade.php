@@ -25,11 +25,11 @@
             <h3>General</h3>
 
             <ul class="nav side-menu">
-                <li><a href="{{route('dashboard.index')}}"><i class="fa fa-home"></i> Dashboard </a></li>
+                <li><a href="{{route('dashboard.index')}}"><i class="fas fa-home"></i> Dashboard </a></li>
 
-                <li><a><i class="fa fa-edit"></i> Проекты <span class="fa fa-chevron-down"></span></a>
+                <li><a><i class="far fa-list-alt"></i> Проекты <span class="fas fa-angle-down pull-right"></span></a>
                     <ul class="nav child_menu">
-                        <li><a href="{{route('projects.index')}}">Список проектов</a></li>
+                        <li><a href="{{route('projects.index')}}"> Список проектов</a></li>
                     </ul>
                 </li>
             </ul>

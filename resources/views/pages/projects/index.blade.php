@@ -3,7 +3,7 @@
     <div class="">
         <div class="page-title">
             <div class="title_left">
-                <h3>Projects <small>Listing design</small></h3>
+                <h3>Проекты</h3>
             </div>
 
             <div class="title_right">
@@ -24,37 +24,25 @@
             <div class="col-md-12">
                 <div class="x_panel">
                     <div class="x_title">
-                        <h2>Projects</h2>
+                        <h2>Список проектов</h2>
                         <ul class="nav navbar-right panel_toolbox">
-                            <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
-                            </li>
-                            <li class="dropdown">
-                                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"><i class="fa fa-wrench"></i></a>
-                                <ul class="dropdown-menu" role="menu">
-                                    <li><a href="#">Settings 1</a>
-                                    </li>
-                                    <li><a href="#">Settings 2</a>
-                                    </li>
-                                </ul>
-                            </li>
-                            <li><a class="close-link"><i class="fa fa-close"></i></a>
-                            </li>
+                            <li class="pull-right"><a class="collapse-link"><i class="fa fa-chevron-up"></i></a></li>
                         </ul>
                         <div class="clearfix"></div>
                     </div>
                     <div class="x_content">
 
-                        <p>Simple table with project listing with progress and editing options</p>
+                        <p>Таблица с перечнем проектов с параметрами выполнения и редактирования</p>
 
                         <table class="table table-striped projects">
                             <thead>
                             <tr>
                                 <th style="width: 1%">#</th>
-                                <th style="width: 20%">Project Name</th>
-                                <th>Team Members</th>
-                                <th>Project Progress</th>
-                                <th>Status</th>
-                                <th style="width: 20%">#Edit</th>
+                                <th style="width: 25%">Название</th>
+                                <th style="width: 25%">Команда</th>
+                                <th>Приоритет</th>
+                                <th>Статут</th>
+                                <th style="width: 25%"></th>
                             </tr>
                             </thead>
                             <tbody>
@@ -62,39 +50,30 @@
                             <tr>
                                 <td>{{++$loop->index}}</td>
                                 <td>
-                                    <a>{{$project->title}}</a>
+                                    <a href="{{route('projects.show', $project)}}">{{$project->title}}</a>
                                     <br />
-                                    <small>Создан: {{\Carbon\Carbon::parse($project->created_at)->format('d-m-Y')}}</small>
+                                    <small><i class="far fa-calendar-alt"></i> Создан: {{\Carbon\Carbon::parse($project->created_at)->format('d.m.Y')}}</small>
                                 </td>
                                 <td>
                                     <ul class="list-inline">
+                                        @foreach($project->users as $user)
                                         <li>
-                                            <img src="images/user.png" class="avatar" alt="Avatar">
+                                            <img src="{{$user->avatar_url}}" class="avatar" alt="Avatar" title="{{$user->fullname}}">
                                         </li>
-                                        <li>
-                                            <img src="images/user.png" class="avatar" alt="Avatar">
-                                        </li>
-                                        <li>
-                                            <img src="images/user.png" class="avatar" alt="Avatar">
-                                        </li>
-                                        <li>
-                                            <img src="images/user.png" class="avatar" alt="Avatar">
-                                        </li>
+                                        @endforeach
                                     </ul>
                                 </td>
-                                <td class="project_progress">
-                                    <div class="progress progress_sm">
-                                        <div class="progress-bar bg-green" role="progressbar" data-transitiongoal="57"></div>
-                                    </div>
-                                    <small>57% Complete</small>
+                                <td>
+                                    <button type="button" class="btn {{$project->priorityClass()}} btn-xs">{{$project->priority}}</button>
                                 </td>
                                 <td>
-                                    <button type="button" class="btn btn-success btn-xs">Success</button>
+                                    <button type="button" class="btn {{$project->statusClass()}} btn-xs">{{$project->status}}</button>
                                 </td>
-                                <td>
-                                    <a href="#" class="btn btn-primary btn-xs"><i class="fa fa-folder"></i> View </a>
-                                    <a href="#" class="btn btn-info btn-xs"><i class="fa fa-pencil"></i> Edit </a>
-                                    <a href="#" class="btn btn-danger btn-xs"><i class="fa fa-trash-o"></i> Delete </a>
+
+                                <td align="right">
+                                    <a href="{{route('projects.show', $project)}}" class="btn btn-primary btn-xs"><i class="fa fa-folder"></i> View </a>
+                                    <a href="{{route('projects.update', $project)}}" class="btn btn-info btn-xs"><i class="far fa-edit"></i> Edit </a>
+                                    <a href="{{route('projects.destroy', $project)}}" class="btn btn-danger btn-xs"><i class="far fa-trash-alt"></i>Delete </a>
                                 </td>
                             </tr>
                             @endforeach

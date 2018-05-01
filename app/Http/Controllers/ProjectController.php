@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Project;
+
 class ProjectController extends Controller
 {
     public function index()
@@ -24,5 +26,24 @@ class ProjectController extends Controller
         $projects = auth()->user()->attachProjects(request('count', 15));
 
         return view('pages.projects.index', compact('projects'));
+    }
+
+    public function show(Project $project)
+    {
+        $project->load(['comments' => function($comment) {
+            $comment->with('user');
+        }, 'users', 'creator', 'files']);
+
+        return view('pages.projects.show', compact('project'));
+    }
+
+    public function update(Project $project)
+    {
+        return view('pages.projects.show', compact('project'));
+    }
+
+    public function destroy(Project $project)
+    {
+        return view('pages.projects.show', compact('project'));
     }
 }

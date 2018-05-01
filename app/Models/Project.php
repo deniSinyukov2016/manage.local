@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Http\Controllers\Traits\Classeble;
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
@@ -12,18 +13,23 @@ use Illuminate\Support\Collection;
  */
 class Project extends Model
 {
-    use SoftDeletes;
+    use SoftDeletes, Classeble;
 
     protected $guarded = ['id'];
 
     public function creator()
     {
-        return $this->hasOne(User::class, 'user_id');
+        return $this->hasOne(User::class, 'id', 'user_id');
     }
 
     public function users()
     {
         return $this->belongsToMany(User::class);
+    }
+
+    public function files()
+    {
+        return $this->morphMany(File::class, 'fileable');
     }
 
     /* Return users which anchored to projects*/
@@ -56,4 +62,17 @@ class Project extends Model
     {
         return $this->morphToMany(Technology::class, 'technologgable');
     }
+
+//    public function priorityClass()
+//    {
+//        switch ($this->priority) {
+//            case strtoupper(config('enums.projects.priorities.HIGH')) : {
+//                return 'btn-danger';
+//            }break;
+//            case strtoupper(config('enums.projects.priorities.MIDDLE')) : {
+//                return 'btn-warning';
+//            }break;
+//            default: return 'btn-primary';
+//        }
+//    }
 }

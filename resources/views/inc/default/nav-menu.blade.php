@@ -27,8 +27,8 @@
                             <a href="{{ route('logout') }}"
                                onclick="event.preventDefault();
                                                      document.getElementById('logout-form').submit();">
-                                <i class="fa fa-sign-out pull-right"></i>
-                                Logout
+                                <i class="fas fa-power-off pull-right"></i>
+                                Выйти
                             </a>
 
                             <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
@@ -41,7 +41,7 @@
 
                 <li role="presentation" class="dropdown">
                     <a href="javascript:;" class="dropdown-toggle info-number" data-toggle="dropdown" aria-expanded="false">
-                        <i class="fa fa-envelope-o"></i>
+                        <i class="far fa-bell"></i>
                         <span class="badge bg-green">6</span>
                     </a>
                     <ul id="menu1" class="dropdown-menu list-unstyled msg_list" role="menu">
